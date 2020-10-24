@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<!-- If you delete this meta tag, Half Life 3 will never be released. -->
+	<meta name="viewport" content="width=device-width" />
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Airbnb</title>
+
+	<link rel="stylesheet" type="text/css" href="" />
+
+</head>
+
+<body bgcolor="#FFFFFF">
+
+	<!-- BODY -->
+	<table class="body-wrap">
+		<tr>
+			<td></td>
+			<td class="container" bgcolor="#FFFFFF">
+
+				<div class="content">
+					<table>
+						<tr>
+							<td>
+								<h3>Gracias, {{user}}</h3>
+								<p class="lead">Su reserva ha sido realizada exitosamente.</p>
+								<p>Su código de reserva es <b>{{code}}</b>.
+									<p>Los datos de su reserva:</p>
+									<ul>
+										<li>Ciudad: {{city}}</li>
+										<li>Lugar: {{prop}}</li>
+										<li>Capacidad máxima: {{pax}}</li>
+										<li>Total: ${{total}}</li>
+										<li>Fechas:</li>
+										<ul>
+											{% for d in dates %}
+											<li>{{d}}</li>
+											{% endfor %}
+										</ul>
+									</ul>
+
+									<!-- social & contact -->
+									<table class="social" width="100%">
+										<tr>
+											<td>
+												<!-- column 2 -->
+												<table align="left" class="column">
+													<tr>
+														<td>
+
+															<h5 class="">Contact Info:</h5>
+																Email: <strong><a
+																		href="">utntusi2020@gmail.com</a></strong>
+															</p>
+														</td>
+													</tr>
+												</table><!-- /column 2 -->
+
+												<span class="clear"></span>
+
+											</td>
+										</tr>
+									</table><!-- /social & contact -->
+
+							</td>
+						</tr>
+					</table>
+				</div><!-- /content -->
+
+			</td>
+			<td></td>
+		</tr>
+	</table><!-- /BODY -->
+
+</body>
+
+</html>

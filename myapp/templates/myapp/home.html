@@ -1,0 +1,71 @@
+{% load static %}
+{% include "myapp/header.html" %}
+
+        <div class="container">
+            <div class="row pt-5">
+                {% if estates %}
+                {% for e in estates %}
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 pt-3">
+                    <div class="card">
+                        {% if e.image %}
+                            <img class=" card-img-top" src="{{ e.image.url }}" alt="Imagen de la propiedad">
+                        {% else %}
+                            <img class=" card-img-top" src="/photos/no-image.jpg" alt="Imagen de la propiedad">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{e.title|truncatechars:29}}</h5>
+                            <p class="card-text" style="height: 83px;">{{e.descripcion|truncatechars:120}}</p>
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <p class="mt-2">${{e.dailyRate}} p/dia</p>
+                                </div>
+                                <div class="col-6">
+                                    <a href="{% url 'detail' e.id %}" class="btn btn-color">Consultar</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item align-content-between">
+                                <span class="d-flex justify-content-between align-items-center pl-3 pr-3">
+                                    {% for s in e.services.all %}
+                                    <i class="{{s.iconClass}} mx-auto" aria-hidden="true"></i>
+                                    {% endfor %}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+
+                <div class="container d-flex justify-content-center align-items-center ">
+
+                    <div class="card p-5 filter-card">
+    
+                        <div class="col-12">
+        
+                            <div class="text-center">
+                                <img src="/static/myapp/404.gif" class="img-responsive gif-not-found" alt="My image">
+                            </div>
+        
+                            <div class="not-found-message">
+    
+                                <h1 class="text-jumbo text-ginormous hide-sm">¡Uy!</h1>
+                                <h2>No se encontraron resultados de tu búsqueda.</h2>
+                                
+
+                                <a class="btn-not-found" href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
+                                </a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% include "myapp/footer.html" %}

@@ -1,0 +1,66 @@
+{% load static %}
+{% include "myapp/header.html" %}
+
+    <div class="container">
+        <div class="row pt-5">
+            {% if rents_per_reservation %}
+            <div class="table-responsive" style="min-height: 265px;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cod.</th>
+                            <th scope="col">Propiedad</th>
+                            <th scope="col">Nombre de Usuario</th>
+                            <th scope="col">Fechas de Alquiler</th>
+                            <th scope="col">Precio Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rent_per_reservation in rents_per_reservation %}
+                        <tr>
+                            <th scope="row">{{rent_per_reservation.0.reservation.code}}</th>
+                            <td>{{rent_per_reservation.0.estate.title}}</td>
+                            <td>{{rent_per_reservation.0.reservation.user}}</td>
+                            <td>{% for rent in rent_per_reservation %}
+                                {{rent.date}} <br>
+                                {% endfor %}
+                            </td>
+                            <td>$ {{rent_per_reservation.0.reservation.total}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+
+            <div class="container d-flex justify-content-center align-items-center ">
+        
+                <div class="card p-5 filter-card">
+            
+                    <div class="col-12">
+                
+                        <div class="text-center">
+                            <img src="/static/myapp/no-reservations.png" class="img-responsive gif-not-found" alt="My image">
+                        </div>
+                
+                        <div class="not-found-message">
+                    
+                            <h1 class="text-jumbo text-ginormous hide-sm">¡Uy!</h1>
+                            <h2>Por el momento nadie hizo reservas.</h2>
+                    
+                    
+                            <a class="btn-not-found" href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
+                            </a>
+                        </div>
+                    </div>
+        
+                </div>
+                
+                
+            {% endif %}
+        </div>
+    </div>
+
+
+
+{% include "myapp/footer.html" %}

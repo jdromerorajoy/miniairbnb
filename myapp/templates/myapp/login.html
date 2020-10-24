@@ -1,0 +1,36 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Airbnb | Login</title>
+    <link rel="stylesheet" href="{% static 'myapp/styles.css'%}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body style="   padding-top: 40px;padding-bottom: 40px; background-color: #f5f5f5;">
+    <div class="container">
+        <div class="text-center d-flex align-items-center">
+            {% block content %}
+            <form class="form-login" method="POST" action="/login/">
+                <img class="mb-4" src="{% static 'myapp/airbnb.png'%}" alt="" width="72" height="72">
+                <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+                {{form|crispy}}
+                {% csrf_token %}
+                <button class="btn btn-lg btn-color btn-block" type="submit">Login</button>
+                <p class="mt-5 mb-3 text-muted">© 2020</p>
+            </form>
+           
+            {% endblock %}
+
+        </div>
+    </div>
+</body>
+
+
+</html>

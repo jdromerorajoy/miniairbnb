@@ -1,0 +1,70 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% include "myapp/header.html" %}
+{% csrf_token %}
+<div class="container">
+	<div class="card p-3 filter-card d-none d-md-block ">
+		<div class="row">
+			<div class="col-12 col-md-6">
+    
+				{% if estate.image %}
+				<img class="card-img-top" src="{{estate.image.url}}" alt="Card image cap">
+				{% else %}
+				<img class="card-img-top card-img-bottom" src="/photos/no-image.jpg" alt="Card image cap">
+				{% endif %}
+				
+				
+				<a href="{% url 'index' %}" class="btn btn-color mt-4 btn-block">Volver al inicio</a>
+			</div>
+			<div class="col-12 col-md-6">
+				<div class="card-body">
+					<h5 class="card-title">Gracias {{reservation.user}} !</h5>
+					<p class="card-text">Su reserva en <span class="font-weight-bolder">{{estate.title}}
+                                </span>por un total de <span class="font-weight-bolder">${{total}}</span> ha sido
+						confirmada exitosamente</p>
+					<p>Se ha enviado un correo electrónico a la dirección proporcionada con los datos de la
+						reserva.</p>
+					<ul class="list-group list-group-flush ">
+						<li class="list-group-item ">Su Código: <span
+								class="font-weight-bolder">{{reservation.code}}</span></li>
+						<li class="list-group-item">Fechas:
+							{% for d in dates %}
+							<p class="font-weight-bolder">{{d.date}}</p>
+							{% endfor %}
+						</li>
+					</ul>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	<div class="card p-3 filter-card d-block d-md-none ">
+		<div class="row">
+			<div class="col-12">
+				<div class="card-body">
+					<h5 class="card-title">Gracias {{reservation.user}} !</h5>
+					<p class="card-text">Su reserva en <span class="font-weight-bolder">{{estate.title}}
+                                </span>por un total de <span class="font-weight-bolder">${{total}}</span> ha sido
+						confirmada exitosamente</p>
+					<p>Se ha enviado un correo electrónico a la dirección proporcionada con los datos de la
+						reserva.</p>
+					<ul class="list-group list-group-flush ">
+						<li class="list-group-item ">Cód.: <span
+								class="font-weight-bolder">{{reservation.code}}</span></li>
+						<li class="list-group-item">Fechas:
+							{% for d in dates %}
+							<p class="font-weight-bolder">{{d.date}}</p>
+							{% endfor %}
+						</li>
+					</ul>
+					<a href="{% url 'index' %}" class="btn btn-color mt-4 btn-block">Volver al inicio</a>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% include "myapp/footer.html" %}

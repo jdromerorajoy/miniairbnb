@@ -1,0 +1,129 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% include "myapp/header.html" %}
+
+    <div class="container">
+        <div class="row pt-5">
+            <div class="col-12 col-lg-8">
+                <div class="card card-detail">
+                    <div class="card-body">
+
+    
+                        {% if estate.image %}
+                            <img class="card-img-top card-img-bottom" src="{{ estate.image.url }}" alt="Card image cap">
+                        {% else %}
+                            <img class="card-img-top card-img-bottom" src="/photos/no-image.jpg" alt="Card image cap">
+                        {% endif %}
+                        
+                        
+                        <h2 class="card-title title-item mt-3">{{estate.title}}</h2>
+                        <p class="text-secondary">{{estate.city.title}}</p>
+                        <h6 class="card-subtitle mb-2 text-muted">Hospedado por Alojamiento <span
+                                class="text-secondary ml-4">Cantidad máxima de personas: {{estate.pax}}</span><a href=""
+                                class="ml-4" style="color:#1ca5bd;"> Contacta al anfitrion</a></h6>
+                        <p class="card-text">{{estate.descripcion}}</p>
+                        <div class="border-top pt-3">
+                            <h6>Servicios</h6>
+                            <div class="row">
+                                {% for s in services %}
+                                <div class="col-6">
+                                    <p class="text-muted"><i class="{{s.iconClass}}" aria-hidden="true"></i>
+                                        {{s.name}}</p>
+                                </div>
+                                {% endfor %}
+                                <input id="dailyRate" value={{ estate.dailyRate }} hidden=true>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="border-bottom pb-3">
+                            <h5 class="card-title">Precio por dia $ {{estate.dailyRate}}</h5>
+                        </div>
+                        <form method="POST" action="/thanks/{{estate.id}}/">
+                            {% csrf_token %}
+                            <div class="mt-4">
+                                <div class="form-group">
+                                    {{ form.dateFrom|as_crispy_field }}
+                                </div>
+                                <div id="price-wrapper" hidden=true>
+                                    <div class="border-bottom d-flex justify-content-between  mt-5">
+                                        <div>
+                                            <p class="text-muted" id="q-nights">{{estate.dailyRate}} x 0 noches</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-muted" id="subtotal">$0</p>
+                                        </div>
+                                    </div>
+                                    <div class="border-bottom d-flex justify-content-between mt-2">
+                                        <div>
+                                            <p class="text-muted">Comision por servicio</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-muted" id="commission">8% = $0 </p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between  mt-2">
+                                        <div>
+                                            <p class="">Total</p>
+                                        </div>
+                                        <div>
+                                            <p class="" id="total">$0</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-bottom d-flex form-group justify-content-between">
+                                    {{ form.user|as_crispy_field }}
+                                </div>
+                                <div class="border-bottom d-flex form-group justify-content-between">
+                                    {{ form.email|as_crispy_field }}
+                                </div>
+                                <button class="mt-3 btn btn-md btn-color btn-block" type="submit" id="reserve-btn"
+                                    disabled>Reservar</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    let options = document.getElementById("id_date").options;
+    let count = 0;
+    let dailyRate = document.getElementById("dailyRate").value;
+    let wrapper = document.getElementById("price-wrapper");
+    let button = document.getElementById("reserve-btn")
+    let total = document.getElementById("total")
+    let subtotal = document.getElementById("subtotal")
+    let commission = document.getElementById("commission")
+    let nights = document.getElementById("q-nights")
+    
+    document.getElementById("id_date").addEventListener('change', function (e) {
+        count = 0;
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].selected) count++;
+        }
+        if (count === 0) {
+            wrapper.hidden = true
+            button.disabled = true
+        } else {
+            subt = (dailyRate * count)
+            com = Math.round((subt * 0.08) * 100) / 100
+            wrapper.hidden = false
+            button.disabled = false
+            nights.innerHTML = dailyRate + " x " + count + " noches"
+            subtotal.innerHTML = "$" + subt
+            commission.innerHTML = "8% = $" + com
+            total.innerHTML = "$" + (subt + com)
+        }
+    });
+
+</script>
+
+
+{% include "myapp/footer.html" %}
