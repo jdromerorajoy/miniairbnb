@@ -30,35 +30,10 @@
 								class="font-weight-bolder">{{reservation.code}}</span></li>
 						<li class="list-group-item">Fechas:
 							{% for d in dates %}
-							<p class="font-weight-bolder">{{d.date}}</p>
+							<p class="font-weight-bolder">Desde {{d.dateFrom}} hasta {{d.dateTo}}</p>
 							{% endfor %}
 						</li>
 					</ul>
-				</div>
-			
-			</div>
-		</div>
-	</div>
-	<div class="card p-3 filter-card d-block d-md-none ">
-		<div class="row">
-			<div class="col-12">
-				<div class="card-body">
-					<h5 class="card-title">Gracias {{reservation.user}} !</h5>
-					<p class="card-text">Su reserva en <span class="font-weight-bolder">{{estate.title}}
-                                </span>por un total de <span class="font-weight-bolder">${{total}}</span> ha sido
-						confirmada exitosamente</p>
-					<p>Se ha enviado un correo electrónico a la dirección proporcionada con los datos de la
-						reserva.</p>
-					<ul class="list-group list-group-flush ">
-						<li class="list-group-item ">Cód.: <span
-								class="font-weight-bolder">{{reservation.code}}</span></li>
-						<li class="list-group-item">Fechas:
-							{% for d in dates %}
-							<p class="font-weight-bolder">{{d.date}}</p>
-							{% endfor %}
-						</li>
-					</ul>
-					<a href="{% url 'index' %}" class="btn btn-color mt-4 btn-block">Volver al inicio</a>
 				</div>
 			
 			</div>

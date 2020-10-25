@@ -93,7 +93,7 @@
     </div>
 
 <script>
-    let options = document.getElementById("id_date").options;
+    let options = document.getElementById("id_dateFrom").options;
     let count = 0;
     let dailyRate = document.getElementById("dailyRate").value;
     let wrapper = document.getElementById("price-wrapper");
@@ -103,7 +103,7 @@
     let commission = document.getElementById("commission")
     let nights = document.getElementById("q-nights")
     
-    document.getElementById("id_date").addEventListener('change', function (e) {
+    document.getElementById("id_dateFrom").addEventListener('change', function (e) {
         count = 0;
         for (var i = 0; i < options.length; i++) {
             if (options[i].selected) count++;

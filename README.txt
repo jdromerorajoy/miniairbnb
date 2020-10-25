@@ -1,8 +1,10 @@
 User: felipe
 Pass : felipe123456
 
-Depto para dos personas: 1 nov - 15 nov Para 2 personas.
-Hermoso Monoambiente: 3 nov - 30 nov   Para 1 persona.
+Propiedades alquiladas
+    Depto para dos personas: 1 nov - 15 nov Para 2 personas.
+    Hermoso Monoambiente: 3 nov - 30 nov   Para 1 persona.
+
 
 User : nico
 Pass : nico123456

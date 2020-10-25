@@ -90,16 +90,16 @@ def thanks(request, id=0):
         form = DetailForm(data=request.POST, estateId=id)
            
         prop = Estate.objects.get(id=id)
-        cod = datetime.today().strftime('%y-%m-%d-%H-%M-%S') + "-" + str(id) + "-" + str(prop.user.id)
+        cod = datetime.today().strftime('%y-%m-%d-%H-%M-%S') + "-" + str(id) + "-" + str(prop.owner.id)
         getcontext().prec = 10
-        total = (prop.dailyRate * form['date'].value().__len__()) * Decimal(1.08)
+        total = (prop.dailyRate * form['dateFrom'].value().__len__()) * Decimal(1.08)
         user = form['user'].value()
         email = form['email'].value()
         city = prop.city.title
         r = Reservation(code=cod, user=user, total=total)
         r.save()
         
-        for i in form['date'].value():
+        for i in form['dateFrom'].value():
             dte = int(i)
             rd = RentDate.objects.get(id=dte)
             rd.reservation = r
@@ -122,7 +122,7 @@ def thanks(request, id=0):
         msg = EmailMultiAlternatives(subject, html_content, EMAIL_FROM, to=[email,])
         msg.content_subtype = 'html'
         msg.mixed_subtype = 'related'
-        msg.send()
+        #msg.send()
         return render(request,'myapp/thanks.html', {'form':form, 'estate':prop, 'reservation':r, 'dates':finalDates, 'total':round(r.total, 2)},)  
     return redirect('/')
 
