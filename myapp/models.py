@@ -77,5 +77,5 @@ class RentDate(models.Model):
         ordering=('dateFrom','dateTo','estate')
 
     def __str__(self):
-        return  str(self.dateFrom.strftime("%d-%m-%Y"))
+        return  "Del " + str(self.dateFrom.strftime("%d-%m-%Y")) + " hasta " + str(self.dateTo.strftime("%d-%m-%Y"))
 
