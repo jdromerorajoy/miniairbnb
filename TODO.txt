@@ -1,0 +1,5 @@
+Agregar fecha hasta dendro del listado de fechas a alquilar.
+
+agregar que una casa de las para alquilar tenga mas de una fecha
+
+arreglar el envio de emial .
