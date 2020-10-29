@@ -122,7 +122,7 @@ def thanks(request, id=0):
         msg = EmailMultiAlternatives(subject, html_content, EMAIL_FROM, to=[email,])
         msg.content_subtype = 'html'
         msg.mixed_subtype = 'related'
-        #msg.send()
+        msg.send()
         return render(request,'myapp/thanks.html', {'form':form, 'estate':prop, 'reservation':r, 'dates':finalDates, 'total':round(r.total, 2)},)  
     return redirect('/')
 
