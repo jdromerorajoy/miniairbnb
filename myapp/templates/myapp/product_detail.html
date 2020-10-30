@@ -138,10 +138,10 @@
       for (var i = 0; i < op.length; i++) {
         if (op[i].selected) {
           let date1 = new Date(
-            formatDate(op[op.selectedIndex].innerHTML.slice(4, 14))
+            formatDate(op[i].innerHTML.slice(4, 14))
           );
           let date2 = new Date(
-            formatDate(op[op.selectedIndex].innerHTML.slice(21))
+            formatDate(op[i].innerHTML.slice(21))
           );
 
           // To calculate the time difference of two dates
